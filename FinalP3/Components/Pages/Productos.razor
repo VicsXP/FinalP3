@@ -1,0 +1,345 @@
+﻿@page "/productos"
+
+@using FinalP3.Models
+@using FinalP3.Services
+
+@inject ProductoService productoService
+
+<h1 class="mb-4">
+    Registro de Productos
+</h1>
+
+<div class="mb-4">
+
+    <label class="form-label">
+        Tipo de Producto
+    </label>
+
+    <select class="form-control"
+            @bind="tipoSeleccionado">
+
+        <option>Bebida</option>
+        <option>PlatoFuerte</option>
+        <option>Postre</option>
+
+    </select>
+
+</div>
+
+@if (tipoSeleccionado == "Bebida")
+{
+    <div class="dashboard-card">
+
+        <div class="mb-3">
+
+            <label>Código</label>
+
+            <input class="form-control"
+                   @bind="nuevaBebida.Codigo" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Nombre</label>
+
+            <input class="form-control"
+                   @bind="nuevaBebida.Nombre" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Precio</label>
+
+            <input type="number"
+                   class="form-control"
+                   @bind="nuevaBebida.PrecioBase" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Volumen (ml)</label>
+
+            <input type="number"
+                   class="form-control"
+                   @bind="nuevaBebida.Volumen" />
+
+        </div>
+
+        <div class="mb-4">
+
+            <label>Tipo</label>
+
+            <select class="form-control"
+                    @bind="nuevaBebida.Tipo">
+
+                <option>Refresco</option>
+
+                <option>Cerveza</option>
+
+                <option>Agua</option>
+
+            </select>
+
+        </div>
+
+        <button class="btn btn-primary"
+                @onclick="GuardarBebida">
+
+            Guardar Bebida
+
+        </button>
+
+    </div>
+}
+
+@if (tipoSeleccionado == "PlatoFuerte")
+{
+    <div class="dashboard-card">
+
+        <div class="mb-3">
+
+            <label>Código</label>
+
+            <input class="form-control"
+                   @bind="nuevoPlato.Codigo" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Nombre</label>
+
+            <input class="form-control"
+                   @bind="nuevoPlato.Nombre" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Precio</label>
+
+            <input type="number"
+                   class="form-control"
+                   @bind="nuevoPlato.PrecioBase" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Tipo Carne</label>
+
+            <select class="form-control"
+                    @bind="nuevoPlato.TipoCarne">
+
+                <option>Res</option>
+
+                <option>Pollo</option>
+
+                <option>Pescado</option>
+
+                <option>Vegetariano</option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label>Acompañamiento</label>
+
+            <select class="form-control"
+                    @bind="nuevoPlato.Acompanamiento">
+
+                <option>Papas</option>
+
+                <option>Arroz</option>
+
+                <option>Ensalada</option>
+
+            </select>
+
+        </div>
+
+        <button class="btn btn-primary"
+                @onclick="GuardarPlato">
+
+            Guardar Plato
+
+        </button>
+
+    </div>
+}
+
+@if (tipoSeleccionado == "Postre")
+{
+    <div class="dashboard-card">
+
+        <div class="mb-3">
+
+            <label>Código</label>
+
+            <input class="form-control"
+                   @bind="nuevoPostre.Codigo" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Nombre</label>
+
+            <input class="form-control"
+                   @bind="nuevoPostre.Nombre" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>Precio</label>
+
+            <input type="number"
+                   class="form-control"
+                   @bind="nuevoPostre.PrecioBase" />
+
+        </div>
+
+        <div class="mb-3 form-check">
+
+            <input type="checkbox"
+                   class="form-check-input"
+                   @bind="nuevoPostre.ContieneAzucar" />
+
+            <label class="form-check-label">
+
+                Contiene Azúcar
+
+            </label>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label>Porción</label>
+
+            <select class="form-control"
+                    @bind="nuevoPostre.Porcion">
+
+                <option>Individual</option>
+
+                <option>Compartir</option>
+
+            </select>
+
+        </div>
+
+        <button class="btn btn-primary"
+                @onclick="GuardarPostre">
+
+            Guardar Postre
+
+        </button>
+
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(mensaje))
+{
+    <div class="alert alert-success mt-4">
+
+        @mensaje
+
+    </div>
+}
+
+@code {
+
+    private string tipoSeleccionado = "Bebida";
+
+    private Bebida nuevaBebida = new();
+
+    private PlatoFuerte nuevoPlato = new();
+
+    private Postre nuevoPostre = new();
+
+    private string mensaje = "";
+
+    private void GuardarBebida()
+    {
+        if (string.IsNullOrWhiteSpace(nuevaBebida.Codigo) ||
+            string.IsNullOrWhiteSpace(nuevaBebida.Nombre))
+        {
+            mensaje = "Complete todos los campos.";
+            return;
+        }
+
+        if (nuevaBebida.PrecioBase <= 0)
+        {
+            mensaje = "El precio debe ser positivo.";
+            return;
+        }
+
+        if (nuevaBebida.Volumen <= 0)
+        {
+            mensaje = "El volumen debe ser positivo.";
+            return;
+        }
+
+        nuevaBebida.TipoProducto = "Bebida";
+
+        productoService.GuardarProducto(nuevaBebida);
+
+        mensaje = "Bebida registrada correctamente.";
+
+        nuevaBebida = new Bebida();
+    }
+
+    private void GuardarPlato()
+    {
+        if (string.IsNullOrWhiteSpace(nuevoPlato.Codigo) ||
+            string.IsNullOrWhiteSpace(nuevoPlato.Nombre))
+        {
+            mensaje = "Complete todos los campos.";
+            return;
+        }
+
+        if (nuevoPlato.PrecioBase <= 0)
+        {
+            mensaje = "El precio debe ser positivo.";
+            return;
+        }
+
+        nuevoPlato.TipoProducto = "PlatoFuerte";
+
+        productoService.GuardarProducto(nuevoPlato);
+
+        mensaje = "Plato registrado correctamente.";
+
+        nuevoPlato = new PlatoFuerte();
+    }
+
+    private void GuardarPostre()
+    {
+        if (string.IsNullOrWhiteSpace(nuevoPostre.Codigo) ||
+            string.IsNullOrWhiteSpace(nuevoPostre.Nombre))
+        {
+            mensaje = "Complete todos los campos.";
+            return;
+        }
+
+        if (nuevoPostre.PrecioBase <= 0)
+        {
+            mensaje = "El precio debe ser positivo.";
+            return;
+        }
+
+        nuevoPostre.TipoProducto = "Postre";
+
+        productoService.GuardarProducto(nuevoPostre);
+
+        mensaje = "Postre registrado correctamente.";
+
+        nuevoPostre = new Postre();
+    }
+}
