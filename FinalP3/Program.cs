@@ -1,8 +1,10 @@
 using FinalP3.Components;
+using FinalP3.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<ProductoService>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
