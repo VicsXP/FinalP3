@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "Codigo": "001",
+    "Nombre": "Limonada",
+    "PrecioBase": 25,
+    "TipoProducto": "Bebida"
+  },
+  {
+    "Codigo": "002",
+    "Nombre": "Frutti di Mari",
+    "PrecioBase": 120,
+    "TipoProducto": "PlatoFuerte"
+  },
+  {
+    "Codigo": "003",
+    "Nombre": "Pie de Pera",
+    "PrecioBase": 40,
+    "TipoProducto": "Postre"
+  }
+]

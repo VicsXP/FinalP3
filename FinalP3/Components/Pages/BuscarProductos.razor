@@ -1,0 +1,70 @@
+﻿@page "/buscar-productos"
+
+@using FinalP3.Models
+@using FinalP3.Services
+
+@inject ProductoService productoService
+
+<h2>Buscar Productos</h2>
+
+<div class="dashboard-card mt-3">
+
+    <input class="form-control mb-3"
+           placeholder="Buscar por nombre o código"
+           @bind="textoBusqueda" />
+
+    <button class="btn btn-primary mb-3"
+            @onclick="Buscar">
+        Buscar
+    </button>
+
+    @if (resultados != null && resultados.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var p in resultados)
+                {
+                    <tr>
+                        <td>@p.Codigo</td>
+                        <td>@p.Nombre</td>
+                        <td>@p.TipoProducto</td>
+                        <td>@p.PrecioBase</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (buscado)
+    {
+        <p>No se encontraron resultados.</p>
+    }
+
+</div>
+
+@code {
+    private string textoBusqueda = "";
+    private List<Producto> resultados = new();
+    private bool buscado = false;
+
+    private void Buscar()
+    {
+        buscado = true;
+
+        if (string.IsNullOrWhiteSpace(textoBusqueda))
+        {
+            resultados = new List<Producto>();
+            return;
+        }
+
+        resultados = productoService.BuscarPorNombre(textoBusqueda);
+    }
+}

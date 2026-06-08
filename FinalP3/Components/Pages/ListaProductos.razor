@@ -1,0 +1,47 @@
+﻿@page "/lista-productos"
+
+@using FinalP3.Models
+@using FinalP3.Services
+
+@inject ProductoService productoService
+
+<h2>Inventario de Productos</h2>
+
+@if (productos == null || productos.Count == 0)
+{
+    <p>No hay productos registrados.</p>
+}
+else
+{
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var p in productos)
+            {
+                <tr>
+                    <td>@p.Codigo</td>
+                    <td>@p.Nombre</td>
+                    <td>@p.TipoProducto</td>
+                    <td>@p.PrecioBase</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Producto> productos = new();
+
+    protected override void OnInitialized()
+    {
+        productos = productoService.ObtenerProductos();
+    }
+}

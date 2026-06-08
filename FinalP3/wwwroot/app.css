@@ -37,19 +37,11 @@ h1:focus {
     text-align: start;
 }
 
-/* =========================
-   GENERAL
-========================= */
-
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
 }
-
-/* =========================
-   SIDEBAR
-========================= */
 
 .sidebar {
     width: 260px;
