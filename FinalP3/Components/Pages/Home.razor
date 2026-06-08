@@ -1,7 +1,82 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<h1 class="mb-4">
+    Restaurante Dashboard
+</h1>
 
-<h1>Hello, world!</h1>
+<p class="mb-5">
+    Administración de productos y pedidos del restaurante.
+</p>
 
-Welcome to your new app.
+<div class="row g-4">
+
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h4>
+                Registrar Producto
+            </h4>
+
+            <p>
+                Agregar bebidas, platos fuertes y postres.
+            </p>
+
+            <a href="/productos"
+                   class="btn btn-primary">
+
+                Abrir
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h4>
+                Inventario
+            </h4>
+
+            <p>
+                Ver todos los productos registrados.
+            </p>
+
+            <a href="/lista-productos"
+                   class="btn btn-primary">
+
+                Abrir
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h4>
+                Buscar Productos
+            </h4>
+
+            <p>
+                Buscar por nombre o código.
+            </p>
+
+            <a href="/buscar-productos"
+                   class="btn btn-primary">
+
+                Abrir
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

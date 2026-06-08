@@ -1,6 +1,66 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<div>
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            Restaurante
+        </div>
+
+        <nav>
+
+            <a href="/"
+               class="sidebar-link">
+
+                Inicio
+
+            </a>
+
+            <a href="/productos"
+               class="sidebar-link">
+
+                Nuevo Producto
+
+            </a>
+
+            <a href="/lista-productos"
+               class="sidebar-link">
+
+                Inventario
+
+            </a>
+
+            <a href="/buscar-productos"
+               class="sidebar-link">
+
+                Buscar Productos
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <h3>
+                Sistema de Gestión de Pedidos
+            </h3>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            @Body
+
+        </div>
+
+    </div>
+
+</div>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
